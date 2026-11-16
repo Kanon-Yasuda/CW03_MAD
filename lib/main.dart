@@ -9,3 +9,26 @@ Future<void> main() async {
   );
   runApp(const CloudQuestApp());
 }
+
+class CloudQuestApp extends StatelessWidget {
+  const CloudQuestApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: CloudQuestHome(),
+    );
+  }
+}
+
+class CloudQuestHome extends StatelessWidget {
+  const CloudQuestHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Cloud Quest')),
+      body: const Center(child: Text('Welcome to Cloud Quest!')),
+    );
+  }
+}
