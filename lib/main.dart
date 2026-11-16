@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
+import 'app.dart';
+import 'services/reward_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,7 @@ class CloudQuestApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: CloudQuestHome(),
+      home: App(onComplete: completeQuest),,
     );
   }
 }
@@ -31,4 +33,8 @@ class CloudQuestHome extends StatelessWidget {
       body: const Center(child: Text('Welcome to Cloud Quest!')),
     );
   }
+}
+
+void completeQuest() {
+  completeChallenge();
 }
