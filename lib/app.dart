@@ -69,3 +69,54 @@ class ChallengeScreen extends StatelessWidget {
     );
   }
 }
+
+class QuestCoachBox extends StatefulWidget {
+  const QuestCoachBox({super.key});
+
+  @override
+  State<QuestCoachBox> createState() => _QuestCoachBoxState();
+}
+
+class _QuestCoachBoxState extends State<QuestCoachBox> {
+  final question = TextEditingController();
+  String reply = '';
+
+  Future<void> askCoach() async {
+    setState(() => reply = 'Loading...');
+
+    try {
+      final answer = await getQuestHint(question.text);
+      if (!mounted) return;
+      setState(() => reply = answer);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => reply = 'Could not get a hint.');
+    }
+  }
+
+  @override
+  void dispose() {
+    question.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: question,
+          maxLength: 300,
+          decoration: const InputDecoration(
+            labelText: 'Ask the AI Coach',
+          ),
+        ),
+        ElevatedButton(
+          onPressed: askCoach,
+          child: const Text('Get Hint'),
+        ),
+        Text(reply),
+      ],
+    );
+  }
+}
