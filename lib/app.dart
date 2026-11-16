@@ -36,12 +36,31 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email = TextEditingController();
+    final password = TextEditingController();
+
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => FirebaseAuth.instance.signInAnonymously(),
-          child: const Text('Sign in'),
-        ),
+      body: Column(
+        children: [
+          const Text('Email'),
+          TextField(controller: email),
+          const Text('Password'),
+          TextField(controller: password, obscureText: true),
+          ElevatedButton(
+            onPressed: () => FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: email.text,
+              password: password.text,
+            ),
+            child: const Text('Sign In'),
+          ),
+          ElevatedButton(
+            onPressed: () => FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: email.text,
+              password: password.text,
+            ),
+            child: const Text('Register'),
+          ),
+        ],
       ),
     );
   }
