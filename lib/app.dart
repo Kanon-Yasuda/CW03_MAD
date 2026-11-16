@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'services/challenge_service.dart';
+import 'services/coach_service.dart';
 
 class App extends StatelessWidget {
   const App({super.key, required this.onComplete});
